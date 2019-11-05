@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class dbController extends Controller
 {
 
  	public function show()
     {
-    	$allData = Task::latest()->get();
-    	return view ('db',compact('allData'));
+    	$allData = User::find(Auth::id())->tasks()->get();
+        $username = Auth::user()->name;
+    	return view ('db',compact(['allData','username']));
     }
 
     public function store(request $request)
@@ -27,13 +29,15 @@ class dbController extends Controller
     		Task::create([
     			'name' => request('name'),
     			'task' => request('task'),
-    			'image' => $img
+    			'image' => $img,
+                'user_id' => Auth::id()
     		]);
     		
     	}else{
     		Task::create([
     			'name' => request('name'),
-    			'task' => request('task')
+    			'task' => request('task'),
+                'user_id' => Auth::id()
     		]);
 
     		

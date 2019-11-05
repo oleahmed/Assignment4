@@ -10,7 +10,9 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 mx-auto">
+      <h3>Welcome <i>{{ $username }}</i>(<a href="{{ url('/logout')}}">Logout</a>)</h3>
 			@include('error.errors')
+      
 
 		<form action="{{route('submit')}}" method="POST" enctype="multipart/form-data">
 			{{csrf_field()}}
@@ -20,7 +22,7 @@
     		<input type="text" class="form-control" id="exampleInputName1" name="name" placeholder="Enter name">
      		</div>
    			<div class="form-group">
-    		<label for="exampleFormControlTextarea1">Textarea</label>
+    		<label for="exampleFormControlTextarea1">Address</label>
    			 <textarea class="form-control" id="exampleFormControlTextarea1" name="task" placeholder="Write something here"></textarea>
   			</div>
 
